@@ -1,9 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import Login from './views/Login.vue'
+import { RouterView } from 'vue-router'
+import { Header, Footer} from './components'
 </script>
 
 <template>
-  <!-- <Login/> -->
-  <RouterView />
+  <Header></Header>
+  <div class="mt-20 mx-5">
+    <RouterView />
+  </div>
+  <Footer></Footer>
 </template>
