@@ -1,3 +1,10 @@
+<script setup>
+import { useRoute } from 'vue-router';
+import { BookCard } from '../components';
+
+const route = useRoute();
+const books = route.meta.books;
+</script>
 <template>
     <div class="float-left top-32">
       <p class="text-green-700 font-bold dark:text-white">Sách đang mượn</p>

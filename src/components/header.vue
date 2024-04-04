@@ -34,21 +34,6 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/author">
-          <div class="block py-2 px-3 font-bold md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-600 dark:text-white md:dark:hover:bg-transparent ">
-            Tác giả nổi bật
-          </div>
-        </router-link>
-        
-      </li>
-      <li>
-        <router-link to="/newbook">
-          <div class="block py-2 px-3 font-bold md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-600 dark:text-white md:dark:hover:bg-transparent ">
-            Mới cập nhật
-          </div>
-        </router-link>
-      </li>
-      <li>
         <router-link to="/borrowedbook">
           <div class="block py-2 px-3 font-bold md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-600 dark:text-white md:dark:hover:bg-transparent ">
             Sách đã mượn
