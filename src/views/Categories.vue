@@ -13,25 +13,25 @@ const book3 = books.filter(f => f.category == categories[3]);
 </script>
 <template>
   <div class="mb-6">
-    <p class="text-center text-green-500 dark:text-white text-lg font-semibold mb-3">{{ categories[0] }}</p>
+    <p class=" text-green-500 dark:text-white text-lg font-semibold mb-3">| {{ categories[0] }}</p>
     <div class="flex flex-wrap gap-4">
       <BookCard v-for="book in book0" :key="book._id" :book="book" />
     </div>
   </div>
   <div class="mb-6">
-    <p class="text-center text-green-500 dark:text-white text-lg font-semibold mb-3">{{ categories[1] }}</p>
+    <p class=" text-green-500 dark:text-white text-lg font-semibold mb-3">| {{ categories[1] }}</p>
     <div class="flex flex-wrap gap-4">
       <BookCard v-for="book in book1" :key="book._id" :book="book" />
     </div>
   </div>
   <div class="mb-6">
-    <p class="text-center text-green-500 dark:text-white text-lg font-semibold mb-3">{{ categories[2] }}</p>
+    <p class=" text-green-500 dark:text-white text-lg font-semibold mb-3">| {{ categories[2] }}</p>
     <div class="flex flex-wrap gap-4">
       <BookCard v-for="book in book2" :key="book._id" :book="book" />
     </div>
   </div>
   <div class="mb-6">
-    <p class="text-center text-green-500 dark:text-white text-lg font-semibold mb-3">{{ categories[3] }}</p>
+    <p class=" text-green-500 dark:text-white text-lg font-semibold mb-3">| {{ categories[3] }}</p>
     <div class="flex flex-wrap gap-4">
       <BookCard v-for="book in book3" :key="book._id" :book="book" />
     </div>

@@ -1,7 +1,7 @@
 import createApiClient from './api.service';
 
 class UserService {
-    constructor (baseUrl = '/users')  {
+    constructor (baseUrl = '/api/users')  {
         this.user = createApiClient(baseUrl);
     }
 
@@ -10,7 +10,7 @@ class UserService {
     }
 
     async getOne(email) {
-        return (await this.user.get(`/${email}`)).data;
+        return (await this.user.get(`/email/${email}`)).data;
     }
 
     async create(data) {

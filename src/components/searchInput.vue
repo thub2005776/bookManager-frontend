@@ -25,7 +25,7 @@ const notifyClosed = () => {
 <template>
     <div v-if="!closed" class="lg:w-[50%] w-[80%] lg:mx-52 absolute z-50 p-4 bg-gray-200 rounded-lg dark:bg-gray-800">
         <button type="button" @click="notifyClosed"
-                    class="absolute z-50 top-0 end-2.5 text-gray-800 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    class="absolute z-50 top-0 end-2.5 text-gray-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                     data-modal-hide="popup-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">

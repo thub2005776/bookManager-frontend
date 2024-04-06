@@ -1,29 +1,36 @@
 <script setup>
 import { BookCard } from '@/components';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const user = route.meta.user;
+const books = route.meta.books;
+const bbooks = route.meta.bbooks;
 </script>
 
 <template>
-    <div class="text-green-700 dark:text-white">
+    <div class="mt-5 text-green-700 dark:text-white">
         <h1 class="font-bold text-2xl text-center mb-6">Thông tin tài khoản</h1>
-        <div
-            class="lg:flex lg:gap-6 bg-blue-100 p-2 rounded-md border border-blue-300 dark:bg-gray-800 dark:border-gray-600 ">
+        <div class="lg:flex lg:gap-6 p-2 dark:bg-gray-800 ">
             <div class="text-center">
-                <img class="w-32 h-32 md:w-52 md:h-52 rounded-full p-1 border border-blue-300 dark:border-gray-600"
-                    src="https://i.pinimg.com/736x/f5/a3/8d/f5a38ddc194c4717bcea5190759fd206.jpg" alt="avatar">
-                <p class="mb-2">Name</p>
-                <p class="mb-3 dark:text-gray-400">Email</p>
-                <router-link to="/editprofile/123">
-                     <button type="button"
-                    class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                    Cập nhật hồ sơ
-                </button>
+                <img class="mx-auto w-32 h-32 md:w-52 md:h-52 rounded-full p-1 border border-blue-300 dark:border-gray-600"
+                    :src="`http://localhost:3000/${user.img}`" alt="avatar">
+                <p class="mb-2">{{ user.name }}</p>
+                <p class="mb-3 dark:text-gray-400">{{ user.email }}</p>
+                <router-link :to="`/editprofile/${user._id}`">
+                    <button type="button"
+                        class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                        Cập nhật hồ sơ
+                    </button>
                 </router-link>
-               
             </div>
-            <div class="flex-1">
-                <!-- Borrowing Book  -->
+            <div>
                 <div class="mb-6">
                     <h1 class="font-bold text-lg mb-6">Sách đang mượn</h1>
+                    <p class="text-center text-gray-500">
+                        Chưa có sách đang mượn
+                        {{ borrowedBooks }}
+                    </p>
                     <ol class="items-center sm:flex">
                         <li class="relative mb-6 sm:mb-0">
                             <div class="flex items-center">
@@ -48,14 +55,14 @@ import { BookCard } from '@/components';
                                     web components and interactive elements.</p>
                             </div>
                         </li>
-
                     </ol>
                 </div>
-                <!-- Borrowing Book end -->
-
-                <!-- Borrowed Book  -->
                 <div class="mb-6">
                     <h1 class="font-bold text-lg mb-6">Sách đã mượn</h1>
+                    <p class="text-center text-gray-500">
+                        Chưa có sách đã mượn
+                        {{ borrowedBooks }}
+                    </p>
                     <ol class="items-center sm:flex">
                         <li class="relative mb-6 sm:mb-0">
                             <div class="flex items-center">
@@ -83,14 +90,14 @@ import { BookCard } from '@/components';
 
                     </ol>
                 </div>
-                <!-- Borrowed Book end -->
-
             </div>
         </div>
         <div>
-            <h1 class="font-bold text-lg text-center my-2">Danh sách yêu thích</h1>
-            <BookCard></BookCard>
+            <h1 class="font-bold text-lg my-2">Danh sách yêu thích</h1>
+            <p v-if="user.favorite.length == 0" class="text-center text-gray-500">
+                Chưa có sách trong danh sách yêu thích
+            </p>
+            <BookCard v-if="user.favorite.length > 0" v-for="book in user.favorite"></BookCard>
         </div>
-
     </div>
 </template>

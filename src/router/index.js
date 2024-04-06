@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import BooksService from '@/services/book.service';
-// import userService from '@/services/user.service';
+import UserService from '@/services/user.service';
 import BorrowedBookService from '@/services/borrowedBook.service';
+import loginService from '@/services/login.service';
+
+var email = await loginService.get();
+var auth = await UserService.getOne(email.email);
 var books = await BooksService.getAll();
 // var users = await userService.getAll();
 var borrowedBook = await BorrowedBookService.getAll();
@@ -25,6 +29,7 @@ const router = createRouter({
       component: () => import('../views/BookDetail.vue'),
       meta: {
         books: books,
+        user: auth,
       },
       props: true,
     },
@@ -49,12 +54,20 @@ const router = createRouter({
     {
       path: '/profile/:id',
       name: 'profile',
-      component: () => import('../views/Profile.vue')
+      component: () => import('../views/Profile.vue'),
+      meta: {
+        user: auth,
+        books: books,
+        bbooks: borrowedBook,
+      }
     },
     {
       path: '/editprofile/:id',
       name: 'editprofile',
-      component: () => import('../views/EditProfile.vue')
+      component: () => import('../views/EditProfile.vue'),
+      meta: {
+        user: auth,
+      }
     },
     {
       path: '/borrowedbook',
