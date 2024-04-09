@@ -4,12 +4,14 @@ import BooksService from '@/services/book.service';
 import UserService from '@/services/user.service';
 import BorrowedBookService from '@/services/borrowedBook.service';
 import loginService from '@/services/login.service';
+import favoriteService from '@/services/favorite.service';
 
-var email = await loginService.get();
-var auth = await UserService.getOne(email.email);
-var books = await BooksService.getAll();
-// var users = await userService.getAll();
-var borrowedBook = await BorrowedBookService.getAll();
+const email = await loginService.get();
+const auth = await UserService.getOne(email.email);
+const books = await BooksService.getAll();
+const borrowedBook = await BorrowedBookService.getManyByUid(auth && auth._id);
+const favorite = await favoriteService.getManyByUid(auth && auth._id);
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +32,7 @@ const router = createRouter({
       meta: {
         books: books,
         user: auth,
+        favorite: favorite,
       },
       props: true,
     },
@@ -57,8 +60,8 @@ const router = createRouter({
       component: () => import('../views/Profile.vue'),
       meta: {
         user: auth,
-        books: books,
         bbooks: borrowedBook,
+        favorite: favorite,
       }
     },
     {
@@ -74,6 +77,7 @@ const router = createRouter({
       name: 'borrowedbook',
       component: () => import('../views/BorrowedBook.vue'),
       meta: {
+        user: auth,
         bbooks: borrowedBook,
       }
     },

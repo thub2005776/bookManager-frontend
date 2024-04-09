@@ -1,6 +1,6 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import { Header, Footer } from './components'
+import { Header } from './components'
 
 </script>
 
@@ -9,5 +9,4 @@ import { Header, Footer } from './components'
   <div class="mt-20 mx-5">
     <RouterView />
   </div>
-  <Footer></Footer>
 </template>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { SearchInput, BookCard } from '../components';
+import { SearchInput, BookCard, Footer } from '../components';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -40,9 +40,10 @@ const showSearchInput = (e) => {
         <!-- Search end  -->
 
         <!-- Book list -->
-        <div class="mb-6 flex gap-4">
+        <div class="mb-6 flex flex-wrap justify-center gap-4">
             <BookCard v-for="book in books" :key="book._id" :book="book" />
         </div>
         <!-- Book list end -->
     </div>
+    <Footer></Footer>
 </template>

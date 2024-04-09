@@ -1,7 +1,7 @@
 import createApiClient from "./api.service";
 
-class BorrowedBooksService {
-    constructor(baseUrl = "/api/borrowedBooks") {
+class FavoritesService {
+    constructor(baseUrl = "/api/favorites") {
         this.api = createApiClient(baseUrl);
     }
     async getAll() {
@@ -21,10 +21,10 @@ class BorrowedBooksService {
         return (await this.api.get(`/${id}`)).data;
     }
     async update(id, data) {
-        return (await this.api.post(`/${id}`, data)).data;
+        return (await this.api.post(`/uid/${id}`, data)).data;
     }
     async delete(id) {
         return (await this.api.delete(`/${id}`)).data;
     }
 }
-export default new BorrowedBooksService();
+export default new FavoritesService();

@@ -6,7 +6,7 @@ const props = defineProps({
 })
 
 
-const result = ref(props.data);
+const result = ref(props.data.slice(0,3));
 const closed = ref(false);
 
 const handleChange = (e) => {

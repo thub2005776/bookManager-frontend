@@ -1,8 +1,8 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
-
-import userService from '@/services/user.service';
+import booksService from '@/services/book.service';
+import favoritesService from '@/services/favorite.service';
 import borrowedBookService from '@/services/borrowedBook.service';
 import router from '@/router';
 
@@ -10,18 +10,28 @@ const route = useRoute();
 const id = route.params.id;
 const books = route.meta.books;
 const user = route.meta.user;
+const favorite = route.meta.favorite;
 
 const book = books.find(f => f._id == id);
-const favortie = ref(false);
+const favortie = ref(favorite);
 const quantity = ref(0);
 
 const handleFavorite = async () => {
     if (user) {
         const values = {
+            'uid': user._id,
             'bid': book._id,
-            'date': Date(),
+            'title': book.title,
+            'img': book.img,
+            'author': book.author,
+            'favorite': true,
         };
-        const userFavorite = await userService.addFavorite(user._id, values);
+
+        if (favortie.value) {
+            values.favorite = false;
+        };
+
+        const userFavorite = await favoritesService.update(user._id, values);
         if (userFavorite) {
             favortie.value = !favortie.value;
         }
@@ -36,15 +46,25 @@ const handleBorrowing = async (e) => {
             const values = {
                 'uid': user._id,
                 'bid': book._id,
+                'title': book.title,
+                'img': book.img,
                 'quantity': quantity.value,
                 'borrowDate': Date(),
                 'returnDate': null,
+                'returned': false,
             }
             const borrowed = await borrowedBookService.create(values);
             if (borrowed) {
-                console.log(borrowed);
-                alert("Mượn sách thành công!");
-                router.push('/borrowedbook');
+                const values = {
+                    'borrowedTimes': book.borrowedTimes + 1,
+                    'stored': book.stored - quantity.value,
+                }
+                const borrowedTimes = await booksService.update(book._id, values);
+                if (borrowedTimes) {
+                    alert("Mượn sách thành công!");
+                    router.push('/borrowedbook');
+                }
+
             }
         } else { alert("Chưa chọn số lượng sách muốn mượn!") }
     } else { alert("Bạn nên đăng nhập trước!") }
@@ -88,7 +108,7 @@ const handleBorrowing = async (e) => {
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                                 Tên sách
                             </dt>
-                            <dd class="text-lg font-semibold">{{ book.author }}</dd>
+                            <dd class="text-lg font-semibold">{{ book.title }}</dd>
                         </div>
                         <div class="flex flex-col py-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
