@@ -122,6 +122,12 @@ const handleBorrowing = async (e) => {
                             </dt>
                             <dd class="text-lg font-semibold">{{ book.category }}</dd>
                         </div>
+                        <div class="flex flex-col py-3">
+                            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
+                                Nhà xuất bản
+                            </dt>
+                            <dd class="text-lg font-semibold">{{ book.publisher }}</dd>
+                        </div>
                         <div class="flex flex-col pt-3">
                             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                                 Lượt mượn

@@ -34,7 +34,7 @@ const brrwedBook = bbooks.filter(f => f.returned);
                     <p v-if="borrBook.length == 0" class="text-center text-gray-500">
                         Chưa có sách đang mượn
                     </p>
-                    <ol v-if="borrBook.length > 0" class="items-center sm:flex">
+                    <ol v-if="borrBook.length > 0" class="items-center flex flex-wrap gap-5">
                         <BBookCard v-for="book in borrBook" :key="book.bid" :book="book" />
                     </ol>
                 </div>
@@ -43,7 +43,7 @@ const brrwedBook = bbooks.filter(f => f.returned);
                     <p v-if="brrwedBook.length == 0" class="text-center text-gray-500">
                         Chưa có sách đã mượn
                     </p>
-                    <ol v-if="brrwedBook.length > 0" class="items-center sm:flex">
+                    <ol v-if="brrwedBook.length > 0" class="items-center flex flex-wrap gap-5">
                         <BBookCard v-for="book in brrwedBook" :key="book.bid" :book="book" />
                     </ol>
                 </div>
@@ -54,7 +54,10 @@ const brrwedBook = bbooks.filter(f => f.returned);
             <p v-if="favorite.length == 0" class="text-center text-gray-500">
                 Chưa có sách trong danh sách yêu thích
             </p>
-            <BBookCard v-if="favorite.length > 0" v-for="book in favorite" :key="book.bid" :book="book"/>
+            <div v-if="favorite.length > 0" class="flex flex-wrap gap-5">
+                <BBookCard v-for="book in favorite" :key="book.bid" :book="book"/>
+            </div>
+            
         </div>
     </div>
 </template>
