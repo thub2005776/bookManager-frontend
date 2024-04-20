@@ -43,7 +43,8 @@ const handleBorrowing = async (e) => {
     e.preventDefault();
     if (user) {
         if (quantity.value) {
-            const values = {
+            if (quantity.value > 0) {
+                const values = {
                 'uid': user._id,
                 'bid': book._id,
                 'title': book.title,
@@ -51,7 +52,7 @@ const handleBorrowing = async (e) => {
                 'quantity': quantity.value,
                 'borrowDate': Date(),
                 'returnDate': null,
-                'returned': false,
+                'state': "Đang mượn",
             }
             const borrowed = await borrowedBookService.create(values);
             if (borrowed) {
@@ -66,6 +67,7 @@ const handleBorrowing = async (e) => {
                 }
 
             }
+            }else { alert("Số lượng sách muốn ít nhất là 1!") }
         } else { alert("Chưa chọn số lượng sách muốn mượn!") }
     } else { alert("Bạn nên đăng nhập trước!") }
 }

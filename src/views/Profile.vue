@@ -7,8 +7,8 @@ const user = route.meta.user;
 const bbooks = route.meta.bbooks;
 const favorite = route.meta.favorite;
 
-const borrBook = bbooks.filter(f => !f.returned );
-const brrwedBook = bbooks.filter(f => f.returned);
+const borrBook = bbooks.filter(f => f.state == 'Đang mượn' || f.state == 'Đang chờ duyệt' );
+const brrwedBook = bbooks.filter(f => f.state != 'Đang mượn');
 
 </script>
 
